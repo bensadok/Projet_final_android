@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="209dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/statut_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@id/title_textview"
+        app:layout_constraintTop_toBottomOf="@id/title_textview" />
+
+    <TextView
+        android:id="@+id/rank_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/statut_textView"
+        app:layout_constraintTop_toBottomOf="@+id/statut_textView" />
+
+    <ImageView
+        android:id="@+id/affiche_imageview"
+        android:layout_width="69dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@id/synopsis_textView"
+        app:layout_constraintTop_toBottomOf="@id/synopsis_textView"
+        tools:srcCompat="@drawable/borderlands" />
+
+    <TextView
+        android:id="@+id/synopsis_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/rank_textView"
+        app:layout_constraintTop_toBottomOf="@+id/rank_textView" />
+
+</android.support.constraint.ConstraintLayout>

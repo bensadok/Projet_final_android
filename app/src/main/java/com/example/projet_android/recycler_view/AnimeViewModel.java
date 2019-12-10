@@ -5,12 +5,14 @@ public class AnimeViewModel {
     private String date;
     private String note;
     private String imageUrl;
+    private int mal_id;
 
-    public AnimeViewModel(String name, String date, String note, String imageUrl){
+    public AnimeViewModel(String name, String date, String note, String imageUrl, int mal_id){
         this.name = name;
         this.date = date;
         this.imageUrl = imageUrl;
         this.note = note;
+        this.mal_id = mal_id;
     }
 
     public String getName() {
@@ -45,6 +47,14 @@ public class AnimeViewModel {
         this.imageUrl = imageUrl;
     }
 
+
+    public int getMal_id() {
+        return mal_id;
+    }
+
+    public void setMal_id(int mal_id) {
+        this.mal_id = mal_id;
+    }
 
 
 }

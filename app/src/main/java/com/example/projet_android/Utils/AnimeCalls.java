@@ -22,17 +22,19 @@ public class AnimeCalls {
             void onFailure();
         }
 
+
+
         // Public method to start fetching users following by Jake Wharton
-        public static void fetchUserFollowing(Callbacks callbacks, String username){
+        public static void get_anime(Callbacks callbacks, String anime){
 
             // Create a weak reference to callback (avoid memory leaks)
             final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
             // Get a Retrofit instance and the related endpoints
-            AnimeService gitHubService = AnimeService.retrofit.create(AnimeService.class);
+            AnimeService animeService = AnimeService.retrofit.create(AnimeService.class);
 
-            // Create the call on Github API
-            Call<RootObject> call = gitHubService.getAnime(username);
+            // Create the call on the API
+            Call<RootObject> call = animeService.getAnime(anime);
             // Start the call
             call.enqueue(new Callback<RootObject>() {
 
@@ -48,13 +50,21 @@ public class AnimeCalls {
                     if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
                 }
             });
+
+
+
         }
 
 
 
 
 
+    }
 
 
 
-}
+
+
+
+
+

@@ -45,13 +45,13 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.AnimeViewH
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        animeActionInterface.onAnimeClick();
+                        animeActionInterface.onAnimeClick(animeViewModel.getMal_id());
                     }
                 });
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        animeActionInterface.onAnimeClick();
+                        animeActionInterface.onAnimeClick(animeViewModel.getMal_id());
                     }
                 });
             }
@@ -63,8 +63,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.AnimeViewH
 
                 this.animeViewModel = animeViewModel;
                 this.position = position;
-
-                nameTextView.setText(animeViewModel.getName());
+                if(animeViewModel.getName().length() > 20)
+                    nameTextView.setText(animeViewModel.getName().substring(0,20));
+                else
+                    nameTextView.setText(animeViewModel.getName());
                 dateTextView.setText(animeViewModel.getDate());
                 noteTextView.setText(animeViewModel.getNote());
                 Glide.with(v)
