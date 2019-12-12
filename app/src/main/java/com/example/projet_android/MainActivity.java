@@ -3,10 +3,13 @@ package com.example.projet_android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet_android.Models.RootObject;
 import com.example.projet_android.Models.Top;
@@ -56,10 +59,7 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
         myDataAdapter = new MyDataAdapter(this);
         recyclerView.setAdapter(myDataAdapter);
 
-
-
-
-    }
+        }
 
 
     /**

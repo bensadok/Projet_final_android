@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:id="@+id/icon_imageview"
+            android:id="@+id/character_imageview"
             android:layout_width="69dp"
             android:layout_height="95dp"
             android:layout_marginLeft="8dp"
@@ -32,7 +32,7 @@
             tools:srcCompat="@drawable/borderlands" />
 
         <ImageButton
-            android:id="@+id/img_btn"
+            android:id="@+id/character_img_btn_character"
             android:layout_width="390dp"
             android:layout_height="111dp"
             android:background="@drawable/gradient_black"
@@ -41,36 +41,50 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/nom_textView"
+            android:id="@+id/character_nom_textView"
             android:layout_width="285dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginLeft="88dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="Nom"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/icon_imageview"
-            app:layout_constraintTop_toTopOf="@+id/icon_imageview"
-            card_view:layout_constraintStart_toStartOf="@+id/icon_imageview" />
+            app:layout_constraintStart_toEndOf="@+id/character_imageview"
+            app:layout_constraintTop_toTopOf="@+id/character_imageview" />
 
         <TextView
-            android:id="@+id/date_textView"
+            android:id="@+id/role_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Role"
+            app:layout_constraintStart_toStartOf="@+id/character_nom_textView"
+            app:layout_constraintTop_toBottomOf="@+id/character_nom_textView" />
+
+        <TextView
+            android:id="@+id/doubleur_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Doubleur"
+            app:layout_constraintStart_toStartOf="@+id/character_nom_textView"
+            app:layout_constraintTop_toBottomOf="@+id/character_nom_textView" />
+
+        <ImageView
+            android:id="@+id/doubleur_imageview"
+            android:layout_width="44dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
             android:layout_marginTop="20dp"
-            android:text="Date"
-            app:layout_constraintStart_toStartOf="@+id/nom_textView"
-            app:layout_constraintTop_toBottomOf="@+id/nom_textView" />
-
-        <TextView
-            android:id="@+id/note_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:layout_marginLeft="76dp"
-            android:text="Note"
-            app:layout_constraintStart_toEndOf="@+id/date_textView"
-            app:layout_constraintTop_toTopOf="@+id/date_textView" />
+            android:background="@color/colorPrimary"
+            android:contentDescription="TODO"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doubleur_textView"
+            app:layout_constraintTop_toBottomOf="@+id/character_nom_textView"
+            tools:srcCompat="@drawable/borderlands" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

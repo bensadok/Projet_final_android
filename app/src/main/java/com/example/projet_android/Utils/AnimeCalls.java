@@ -2,7 +2,9 @@ package com.example.projet_android.Utils;
 
 
 
-import android.support.annotation.Nullable;
+
+
+import androidx.annotation.Nullable;
 
 import com.example.projet_android.Models.RootObject;
 

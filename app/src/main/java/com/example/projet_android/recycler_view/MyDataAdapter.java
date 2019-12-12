@@ -1,12 +1,14 @@
 package com.example.projet_android.recycler_view;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -63,12 +65,12 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.AnimeViewH
 
                 this.animeViewModel = animeViewModel;
                 this.position = position;
-                if(animeViewModel.getName().length() > 20)
-                    nameTextView.setText(animeViewModel.getName().substring(0,20));
+                if(animeViewModel.getName().length() > 23)
+                    nameTextView.setText(animeViewModel.getName().substring(0,23)+"...");
                 else
                     nameTextView.setText(animeViewModel.getName());
                 dateTextView.setText(animeViewModel.getDate());
-                noteTextView.setText(animeViewModel.getNote());
+                noteTextView.setText( "Rated : " + animeViewModel.getNote() +"/10");
                 Glide.with(v)
                         .load(animeViewModel.getImageUrl())
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -99,9 +101,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.AnimeViewH
     public AnimeViewHolder onCreateViewHolder(ViewGroup parent,
                                              int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recyclerview, parent, false);
-        AnimeViewHolder animeViewHolder = new AnimeViewHolder(v, animeActionInterface);
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_recyclerview, parent, false);
+        AnimeViewHolder animeViewHolder = new AnimeViewHolder(view, animeActionInterface);
         return animeViewHolder;
     }
 
