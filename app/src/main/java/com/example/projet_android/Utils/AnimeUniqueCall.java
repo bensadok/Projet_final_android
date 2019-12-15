@@ -3,7 +3,6 @@ package com.example.projet_android.Utils;
 
 import androidx.annotation.Nullable;
 
-import com.example.projet_android.Models.RootObject;
 import com.example.projet_android.Models.RootObject_UniqueAnime;
 
 import java.lang.ref.WeakReference;

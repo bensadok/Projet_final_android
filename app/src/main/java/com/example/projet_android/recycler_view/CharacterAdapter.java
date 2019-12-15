@@ -39,6 +39,7 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
                 nameTextView = v.findViewById(R.id.character_nom_textView);
                 roleTextView = v.findViewById(R.id.role_textView);
                 doubleurTextView = v.findViewById(R.id.doubleur_textView);
+                char_imageView = v.findViewById(R.id.character_imageview);
                 doubleur_imageView = v.findViewById(R.id.doubleur_imageview);
                 imageButton = v.findViewById(R.id.character_img_btn_character);
             }

@@ -30,8 +30,9 @@ public class CharacterCalls {
         // Get a Retrofit instance and the related endpoints
         CharacterService characterService = CharacterService.retrofit.create(CharacterService.class);
 
-        // Create the call on Github API
+        // Create the call on the API
         Call<CharacterRootObject> call = characterService.getCharacter(anime);
+
         // Start the call
         call.enqueue(new Callback<CharacterRootObject>() {
 

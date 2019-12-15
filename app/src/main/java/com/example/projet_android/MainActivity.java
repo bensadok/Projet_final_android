@@ -2,12 +2,15 @@ package com.example.projet_android;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +21,7 @@ import com.example.projet_android.Utils.NetworkAsyncTask;
 import com.example.projet_android.recycler_view.AnimeActionInterface;
 import com.example.projet_android.recycler_view.DataGenerator;
 import com.example.projet_android.recycler_view.MyDataAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -27,12 +31,14 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Top> l_top;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
         executeHttpRequestWithRetrofit();
 
         setupRecyclerView();
@@ -49,17 +55,38 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
+        myDataAdapter = new MyDataAdapter(this);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        layoutManager = new LinearLayoutManager(MainActivity.this);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layoutManager instanceof GridLayoutManager) {
+                    layoutManager = new LinearLayoutManager(MainActivity.this);
+                    Drawable d  =  getResources().getDrawable(R.drawable.ic_view_module_black_24dp);
+                    floatingActionButton.setImageDrawable(d);
+                    myDataAdapter.setLayout("linear");
+                } else {
+                    layoutManager = new GridLayoutManager(MainActivity.this, 2);
+                    Drawable d  =  getResources().getDrawable(R.drawable.ic_view_list_black_24dp);
+                    floatingActionButton.setImageDrawable(d);
+                    myDataAdapter.setLayout("grid");
 
-
-        myDataAdapter = new MyDataAdapter(this);
+                }
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(myDataAdapter);
+            }
+        });
         recyclerView.setAdapter(myDataAdapter);
 
-        }
+
+
+
+
+
+    }
 
 
     /**
@@ -108,11 +135,11 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
     }
 
     // 3 - Update UI showing only name of users
+
     private void updateUIWithListOfAnime(RootObject rootObjects){
         l_top = rootObjects.getTop() ;
         myDataAdapter.bindViewModels(DataGenerator.generateData(l_top));
     }
-
 
     /**
      * When you click on an item you will open a new Activity with detail about the choosen anime.

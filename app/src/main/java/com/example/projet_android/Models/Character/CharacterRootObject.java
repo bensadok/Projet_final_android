@@ -4,11 +4,11 @@ import java.util.List;
 
 public class CharacterRootObject {
 
-    public String request_hash ;
-    public Boolean request_cached;
-    public int request_cache_expiry;
-    public List<Character> characters ;
-    public List<Staff> staff;
+    private String request_hash ;
+    private Boolean request_cached;
+    private int request_cache_expiry;
+    private List<Character> characters ;
+    private List<Staff> staff;
 
     public String getRequest_hash() {
         return request_hash;

@@ -30,7 +30,6 @@ public class DetailActivity extends AppCompatActivity {
     private Fragment_Detail fragment_detail;
     private Fragment_plus_info fragment_plus_info;
     private ViewPager viewPager;
-    private RootObject_UniqueAnime rootObject_uniqueAnime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

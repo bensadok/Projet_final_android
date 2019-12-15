@@ -16,11 +16,15 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.projet_android.DetailActivity;
 import com.example.projet_android.MainActivity;
 import com.example.projet_android.Models.Character.CharacterRootObject;
+import com.example.projet_android.Models.RootObject;
 import com.example.projet_android.Models.RootObject_UniqueAnime;
 import com.example.projet_android.R;
 import com.example.projet_android.Utils.AnimeUniqueCall;
 import com.example.projet_android.Utils.CharacterCalls;
+import com.example.projet_android.Utils.NetworkAsyncTask;
 import com.example.projet_android.recycler_view.CharacterAdapter;
+import com.example.projet_android.recycler_view.Character_DataGenerator;
+import com.example.projet_android.recycler_view.DataGenerator;
 import com.example.projet_android.recycler_view.MyDataAdapter;
 
 public class Fragment_plus_info extends Fragment implements  CharacterCalls.Callbacks{
@@ -46,8 +50,14 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
         rootView = inflater.inflate(R.layout.character_activity, container, false);
         Intent intent = getActivity().getIntent();
         int id = intent.getIntExtra("id",0);
+
+
         executeHttpRequestWithRetrofit(id);
+        System.out.println("test2");
+
         setupRecyclerView();
+        System.out.println("test3");
+
         return rootView;
     }
 
@@ -66,9 +76,8 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
         layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
 
         characterAdapter = new CharacterAdapter();
@@ -79,20 +88,28 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
 
 
     private void executeHttpRequestWithRetrofit(int id){
-        CharacterCalls.get_characters(this, String.valueOf(id)+"/characters_staff");
+        String string_id = String.valueOf(id);
+        CharacterCalls.get_characters(this, string_id+"/characters_staff");
     }
 
 
 
 
     @Override
-    public void onResponse(@Nullable CharacterRootObject anime){
-
+    public void onResponse(@Nullable CharacterRootObject chars){
+        if (chars != null) this.updateUIWithListOfChar(chars);
+        else System.out.println("null");
     }
 
     @Override
     public void onFailure() {
-
     }
+
+
+    private void updateUIWithListOfChar(CharacterRootObject rootObjects){
+
+        characterAdapter.bindViewModels(Character_DataGenerator.generateCharData(rootObjects));
+    }
+
 
 }

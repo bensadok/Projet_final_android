@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Staff {
 
-    public int mal_id;
-    public String url;
-    public String image_url;
-    public String name;
-    public List<String> positions;
+    private int mal_id;
+    private String url;
+    private String image_url;
+    private String name;
+    private List<String> positions;
 
 
     public int getMal_id() {
