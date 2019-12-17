@@ -1,4 +1,4 @@
-package com.example.projet_android.Utils;
+package com.example.projet_android.Utils.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;

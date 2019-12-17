@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".Activity.DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <TextView
             android:id="@+id/title_textview"
@@ -45,7 +45,7 @@
         <ImageView
             android:id="@+id/affiche_imageview"
             android:layout_width="132dp"
-            android:layout_height="170dp"
+            android:layout_height="193dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
@@ -66,7 +66,6 @@
             android:layout_marginRight="10dp"
             android:justificationMode="inter_word"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_synopsis" />
@@ -90,6 +89,27 @@
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/rank_textView"
             app:layout_constraintStart_toEndOf="@+id/rank_textView" />
+
+        <TextView
+            android:id="@+id/downloading_detail"
+            android:layout_width="113dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_db"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="@+id/synopsis_textView"
+            app:layout_constraintStart_toStartOf="@+id/synopsis_textView"
+            app:layout_constraintTop_toBottomOf="@+id/synopsis_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

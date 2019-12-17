@@ -1,11 +1,13 @@
-package com.example.projet_android;
+package com.example.projet_android.Activity;
 
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
@@ -16,8 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet_android.Models.RootObject;
 import com.example.projet_android.Models.Top;
-import com.example.projet_android.Utils.AnimeCalls;
-import com.example.projet_android.Utils.NetworkAsyncTask;
+import com.example.projet_android.R;
+import com.example.projet_android.Utils.api.AnimeCalls;
+import com.example.projet_android.Utils.api.NetworkAsyncTask;
 import com.example.projet_android.recycler_view.AnimeActionInterface;
 import com.example.projet_android.recycler_view.DataGenerator;
 import com.example.projet_android.recycler_view.MyDataAdapter;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
     private RecyclerView.LayoutManager layoutManager;
     private List<Top> l_top;
     private FloatingActionButton floatingActionButton;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,27 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
 
         setContentView(R.layout.activity_main);
         floatingActionButton = findViewById(R.id.floatingActionButton);
+        tv = findViewById(R.id.downloading_main);
+        this.tv.setText("Downloading... Please wait !");
         executeHttpRequestWithRetrofit();
 
         setupRecyclerView();
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_layout:
+                Intent appInfo = new Intent(getApplicationContext(), FavoriteActivity.class);
+                startActivity(appInfo);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * Setup le recycler view with the layout manager (who know wich layout he must use) and the then create an adapter with the current view.
@@ -122,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
     @Override
     public void onResponse(@Nullable RootObject anime) {
         // 2.1 - When getting response, we update UI
+        tv.setVisibility(View.INVISIBLE);
         if (anime != null) this.updateUIWithListOfAnime(anime);
     }
 
@@ -131,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
 
 
     private void updateUIWhenStartingHTTPRequest(){
-
+        this.tv.setText("Downloading... Please wait !");
     }
 
     // 3 - Update UI showing only name of users

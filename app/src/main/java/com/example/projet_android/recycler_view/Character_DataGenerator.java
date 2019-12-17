@@ -2,6 +2,7 @@ package com.example.projet_android.recycler_view;
 
 import com.example.projet_android.Models.Character.Character;
 import com.example.projet_android.Models.Character.CharacterRootObject;
+import com.example.projet_android.Models.Character.Voice_actor;
 import com.example.projet_android.Models.Top;
 
 import java.util.ArrayList;
@@ -17,9 +18,24 @@ public class Character_DataGenerator {
     public static List<CharacterViewModel> generateCharData(CharacterRootObject chars) {
         List<CharacterViewModel> charViewModelList = new ArrayList<>();
 
-        for (Character c : chars.getCharacters()) {
-            CharacterViewModel a = new CharacterViewModel(c.getName(),c.getRole(),c.getVoice_actors().get(0).getName(),c.getImage_url(),c.getVoice_actors().get(0).getImage_url(),c.getMal_id());
-            charViewModelList.add(a);
+            for (Character c : chars.getCharacters()) {
+                String voice_actor ="";
+                String voice_actor_url="";
+                String en_voice_actor="";
+                for(Voice_actor v : c.getVoice_actors()){
+                    if("Japanese".equals(v.getLanguage())){
+                        voice_actor = v.getName();
+                        voice_actor_url = v.getImage_url();
+                    }
+                    if("English".equals(v.getLanguage())){
+                        en_voice_actor = v.getName();
+                    }
+                }
+                if(voice_actor!=""){
+                    CharacterViewModel a = new CharacterViewModel(c.getName(),c.getRole(),voice_actor,c.getImage_url(),voice_actor_url,c.getMal_id(),en_voice_actor);
+                    charViewModelList.add(a);
+                }
+
         }
         return charViewModelList;
     }

@@ -7,17 +7,26 @@ public class CharacterViewModel {
         private String imageUrl;
         private int mal_id;
         private String voice_actor;
+        private String en_voice_actor;
         private String voice_actor_imageUrl;
 
-        public CharacterViewModel(String name, String role, String voice_actor, String imageUrl, String voice_actor_imageUrl, int mal_id){
+        public CharacterViewModel(String name, String role, String voice_actor, String imageUrl, String voice_actor_imageUrl, int mal_id,String en_voice_actor){
             this.name = name;
             this.role = role;
             this.imageUrl = imageUrl;
             this.voice_actor = voice_actor;
             this.mal_id = mal_id;
             this.voice_actor_imageUrl = voice_actor_imageUrl;
+            this.en_voice_actor = en_voice_actor;
         }
 
+    public String getEn_voice_actor() {
+        return en_voice_actor;
+    }
+
+    public void setEn_voice_actor(String en_voice_actor) {
+        this.en_voice_actor = en_voice_actor;
+    }
 
     public String getName() {
         return name;

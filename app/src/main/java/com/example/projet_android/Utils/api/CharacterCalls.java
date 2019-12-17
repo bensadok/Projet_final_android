@@ -1,4 +1,4 @@
-package com.example.projet_android.Utils;
+package com.example.projet_android.Utils.api;
 
 import androidx.annotation.Nullable;
 
@@ -31,6 +31,7 @@ public class CharacterCalls {
         CharacterService characterService = CharacterService.retrofit.create(CharacterService.class);
 
         // Create the call on the API
+        System.out.println(anime);
         Call<CharacterRootObject> call = characterService.getCharacter(anime);
 
         // Start the call
@@ -41,6 +42,7 @@ public class CharacterCalls {
                 // Call the proper callback used in controller (MainFragment)
                 if (callbacksWeakReference.get() != null)
                     callbacksWeakReference.get().onResponse(response.body());
+
             }
 
             @Override

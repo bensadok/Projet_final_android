@@ -1,4 +1,4 @@
-package com.example.projet_android.Utils;
+package com.example.projet_android.Utils.api;
 
 
 
@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import com.example.projet_android.Models.RootObject;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

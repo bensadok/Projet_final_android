@@ -26,8 +26,9 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
             private TextView nameTextView;
             private TextView roleTextView;
             private TextView doubleurTextView;
+            private TextView en_doubleurTextView;
+
             private ImageView char_imageView;
-            private ImageView doubleur_imageView;
             private ImageButton imageButton;
             private CharacterViewModel characterViewModel;
             private int position;
@@ -39,8 +40,8 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
                 nameTextView = v.findViewById(R.id.character_nom_textView);
                 roleTextView = v.findViewById(R.id.role_textView);
                 doubleurTextView = v.findViewById(R.id.doubleur_textView);
+                en_doubleurTextView = v.findViewById(R.id.en_doubleur);
                 char_imageView = v.findViewById(R.id.character_imageview);
-                doubleur_imageView = v.findViewById(R.id.doubleur_imageview);
                 imageButton = v.findViewById(R.id.character_img_btn_character);
             }
 
@@ -53,16 +54,14 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
                 this.characterViewModel = characterViewModel;
                 this.position = position;
                 nameTextView.setText(characterViewModel.getName());
-                roleTextView.setText(characterViewModel.getRole());
-                doubleurTextView.setText(characterViewModel.getVoice_actor());
+                roleTextView.setText("Role : " +characterViewModel.getRole());
+                doubleurTextView.setText("Original voice : "+characterViewModel.getVoice_actor());
+                en_doubleurTextView.setText("English voice : "+characterViewModel.getEn_voice_actor());
                 Glide.with(v)
                         .load(characterViewModel.getImageUrl())
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(char_imageView);
-                Glide.with(v)
-                        .load(characterViewModel.getVoice_actor_imageUrl())
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(doubleur_imageView);
+
 
             }
 

@@ -11,21 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.example.projet_android.DetailActivity;
-import com.example.projet_android.MainActivity;
 import com.example.projet_android.Models.Character.CharacterRootObject;
-import com.example.projet_android.Models.RootObject;
-import com.example.projet_android.Models.RootObject_UniqueAnime;
 import com.example.projet_android.R;
-import com.example.projet_android.Utils.AnimeUniqueCall;
-import com.example.projet_android.Utils.CharacterCalls;
-import com.example.projet_android.Utils.NetworkAsyncTask;
+import com.example.projet_android.Utils.api.CharacterCalls;
 import com.example.projet_android.recycler_view.CharacterAdapter;
 import com.example.projet_android.recycler_view.Character_DataGenerator;
-import com.example.projet_android.recycler_view.DataGenerator;
-import com.example.projet_android.recycler_view.MyDataAdapter;
 
 public class Fragment_plus_info extends Fragment implements  CharacterCalls.Callbacks{
 
@@ -89,7 +79,8 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
 
     private void executeHttpRequestWithRetrofit(int id){
         String string_id = String.valueOf(id);
-        CharacterCalls.get_characters(this, string_id+"/characters_staff");
+        System.out.println(id);
+        CharacterCalls.get_characters(this, string_id);
     }
 
 
@@ -103,6 +94,7 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
 
     @Override
     public void onFailure() {
+        System.out.println("errorrr");
     }
 
 
