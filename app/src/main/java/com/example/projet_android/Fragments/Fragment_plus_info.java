@@ -74,7 +74,10 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
     }
 
 
-
+    /**
+     * the function calling the CharacterCall class function to get the list of character of an anime using the anime id
+     * @param id the id of the anime
+     */
     private void executeHttpRequestWithRetrofit(int id){
         String string_id = String.valueOf(id);
         System.out.println(id);
@@ -94,6 +97,11 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
     }
 
 
+    /**
+     * Create the recycler view using a rootobject
+     * If the return from the api is null, call it again
+     * @param rootObjects
+     */
     private void updateUIWithListOfChar(CharacterRootObject rootObjects){
         if(rootObjects!=null)
             characterAdapter.bindViewModels(Character_DataGenerator.generateCharData(rootObjects));

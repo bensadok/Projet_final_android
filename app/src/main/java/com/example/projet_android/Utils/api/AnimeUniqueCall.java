@@ -37,14 +37,14 @@ public class AnimeUniqueCall {
 
             @Override
             public void onResponse(Call<RootObject_UniqueAnime> call, Response<RootObject_UniqueAnime> response) {
-                // Call the proper callback used in controller (MainFragment)
+                // Call the proper callback used in controller
                 if (callbacksWeakReference.get() != null)
                     callbacksWeakReference.get().onResponse(response.body());
             }
 
             @Override
             public void onFailure(Call<RootObject_UniqueAnime> call, Throwable t) {
-                // Call the proper callback used in controller (MainFragment)
+                // Call the proper callback used in controller
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
         });

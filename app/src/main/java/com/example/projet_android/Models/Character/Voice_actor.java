@@ -5,7 +5,6 @@ import java.util.List;
 public class Voice_actor {
 
     public int mal_id;
-    public String url;
     public String image_url;
     public String name;
     public String language ;
@@ -18,13 +17,6 @@ public class Voice_actor {
         this.mal_id = mal_id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getImage_url() {
         return image_url;

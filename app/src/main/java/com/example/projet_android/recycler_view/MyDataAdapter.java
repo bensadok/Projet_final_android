@@ -175,8 +175,12 @@ public class MyDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-
-
+    /**
+     * The grid or linear disposition is decided here.
+     * @param parent
+     * @param viewType
+     * @return the viewholder
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                       int viewType) {

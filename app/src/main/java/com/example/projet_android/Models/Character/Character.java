@@ -5,7 +5,6 @@ import java.util.List;
 public class Character
 {
     private int mal_id;
-    private String url;
     private String image_url;
     private String name;
     private String role;

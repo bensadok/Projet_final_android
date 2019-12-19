@@ -9,7 +9,7 @@ import java.util.List;
 public class DataGenerator {
 
     /**
-     * Convert the data from the api call (already converted in java) to AnimeViewModel. There we only keep the data we display in the recycler view.
+     * Convert the data from the api call (already converted in java) to AnimeViewModel.
      * @param top the list of all the anime.
      * @return A list of AnimeViewModel
      */
@@ -24,7 +24,11 @@ public class DataGenerator {
         return animeViewModelList;
     }
 
-
+    /**
+     * Convert the data from the local database to AnimeViewModel.
+     * @param list_entity the list of all the anime in the local database.
+     * @return A list of AnimeViewModel
+     */
     public static List<AnimeViewModel> generateData_entity(List<AnimeEntity> list_entity) {
         List<AnimeViewModel> animeViewModelList = new ArrayList<>();
 

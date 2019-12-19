@@ -223,7 +223,7 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
 
 
     /**
-     * the function calling the AnimeCall class function to get an anime using id
+     * the function calling the AnimeUniqueCall class function to get an anime using id
      * @param id the id of the anime
      */
     private void executeHttpRequestWithRetrofit(int id){

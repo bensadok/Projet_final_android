@@ -29,6 +29,9 @@ public class DetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Setup the two fragments the activity contains
+     */
     private void setupViewPagerAndTabs() {
         fragment_detail = new Fragment_Detail();
         fragment_plus_info = new Fragment_plus_info();

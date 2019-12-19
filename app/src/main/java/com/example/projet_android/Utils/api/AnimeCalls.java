@@ -25,7 +25,6 @@ public class AnimeCalls {
 
 
 
-        // Public method to start fetching users following by Jake Wharton
         public static void get_anime(Callbacks callbacks, String anime){
 
             // Create a weak reference to callback (avoid memory leaks)
@@ -41,13 +40,13 @@ public class AnimeCalls {
 
                 @Override
                 public void onResponse(Call<RootObject> call, Response<RootObject> response) {
-                    // Call the proper callback used in controller (MainFragment)
+                    // Call the proper callback used in controller
                     if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body());
                 }
 
                 @Override
                 public void onFailure(Call<RootObject> call, Throwable t) {
-                    // Call the proper callback used in controller (MainFragment)
+                    // Call the proper callback used in controller
                     if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
                 }
             });

@@ -39,7 +39,7 @@ public class CharacterCalls {
 
             @Override
             public void onResponse(Call<CharacterRootObject> call, Response<CharacterRootObject> response) {
-                // Call the proper callback used in controller (MainFragment)
+                // Call the proper callback used in controller
                 if (callbacksWeakReference.get() != null)
                     callbacksWeakReference.get().onResponse(response.body());
 
@@ -47,7 +47,7 @@ public class CharacterCalls {
 
             @Override
             public void onFailure(Call<CharacterRootObject> call, Throwable t) {
-                // Call the proper callback used in controller (MainFragment)
+                // Call the proper callback used in controller
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
         });
