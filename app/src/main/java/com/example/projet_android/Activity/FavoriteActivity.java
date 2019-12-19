@@ -30,7 +30,7 @@ public class FavoriteActivity extends AppCompatActivity implements AnimeActionIn
     private MyDataAdapter myDataAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Top> l_top;
+    private List<AnimeEntity> l_anime;
 
 
 
@@ -43,11 +43,17 @@ public class FavoriteActivity extends AppCompatActivity implements AnimeActionIn
         setupRecyclerView();
     }
 
+    /**
+     * Initiate the database
+     */
     private void init_db() {
         Common.animeDataBase = AnimeDataBase.getInstance(this);
         Common.animeRepository = AnimeRepository.getInstance(AnimeDataSourceImpl.getInstance(Common.animeDataBase.animeDao()));
     }
 
+    /**
+     * Setup le recycler view with the layout manager (who know wich layout he must use) and the then create an adapter with the current view.
+     */
     private void setupRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.favorite_recyclerview);
         // use this setting to improve performance if you know that changes
@@ -61,24 +67,31 @@ public class FavoriteActivity extends AppCompatActivity implements AnimeActionIn
     }
 
 
+    /**
+     * function who get all the anime in the database.
+     */
     private void binding_with_localbase(){
         Common.animeRepository.getAll().observe(this, new Observer<List<AnimeEntity>>() {
             @Override
             public void onChanged(List<AnimeEntity> list) {
                 if (list != null) {
                     myDataAdapter.bindViewModels(DataGenerator.generateData_entity(list));
+                    l_anime = list;
                 }
             }
         });
     }
 
-
+    /**
+     * Open the detail of the anime clicked on
+     * @param id the id of the anime clicked on
+     */
     @Override
     public void onAnimeClick(int id) {
-        for (Top t : l_top){
-            if (t.getMal_id()==id){
+        for (AnimeEntity t : l_anime){
+            if (t.getIdAnime()==id){
                 Intent appInfo = new Intent(getApplicationContext(), DetailActivity.class);
-                appInfo.putExtra("id", t.getMal_id());
+                appInfo.putExtra("id", t.getIdAnime());
                 startActivity(appInfo);
             }
         }

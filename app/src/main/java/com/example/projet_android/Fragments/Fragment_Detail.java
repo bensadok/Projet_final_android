@@ -29,7 +29,7 @@ import java.util.List;
 
 public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbacks {
 
-    public static final String TAB_NAME = "Détail";
+    public static final String TAB_NAME = "Detail";
 
 
     private View rootView;
@@ -47,8 +47,10 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
     public boolean in_bdd =false ;
 
 
-
-
+    /**
+     * Setup the view before the api call
+     * During this time only a TextView is visible asking the user to wait
+     */
     public void setup_view(){
         this.imageView =  rootView.findViewById(R.id.affiche_imageview);
         this.imageView.setVisibility(View.INVISIBLE);
@@ -96,6 +98,10 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
         });
     }
 
+    /**
+     * Setup the view with the data you get from the api call
+     * @param anime the Object you get with the api call
+     */
     public void set_view_data(final RootObject_UniqueAnime anime){
         if(anime!=null) {
             this.title_textView.setText(anime.getTitle());
@@ -124,22 +130,21 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
 
             this.button_database.setVisibility(View.VISIBLE);
             if (!this.in_bdd) {
-                this.button_database.setText("Ajouter aux favoris");
+                this.button_database.setText("Add to favorites");
             } else {
-                this.button_database.setText("Retirer des favoris");
+                this.button_database.setText("Remove from favorites");
             }
             final RootObject_UniqueAnime final_anime = anime;
             final Fragment_Detail ft = this;
             Common.animeRepository.getAll().observe(ft, new Observer<List<AnimeEntity>>() {
                 @Override
                 public void onChanged(List<AnimeEntity> list) {
-                    System.out.println(list.size() + " taille list");
                     if (list != null) {
                         for (AnimeEntity e : list) {
                             if (e.getIdAnime() == final_anime.mal_id) {
                                 System.out.println(e.getIdAnime());
                                 in_bdd = true;
-                                button_database.setText("Retirer des favoris");
+                                //button_database.setText("Remove from favorites");
                             }
                         }
                     }
@@ -150,28 +155,26 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
 
                     if (in_bdd) {
                         System.out.println(in_bdd);
-                        button_database.setText("Ajouter des favoris");
+                        button_database.setText("Add to favorites");
                         AnimeEntity animeEntity = new AnimeEntity();
-                        System.out.println(final_anime.getTitle() + "TITLTEEEEE_DELLLL");
                         animeEntity.setAnime_name(final_anime.getTitle());
                         animeEntity.setDate(final_anime.getPremiered());
                         animeEntity.setNote(final_anime.getScore());
                         animeEntity.setIdAnime(final_anime.mal_id);
                         animeEntity.setImage_url(final_anime.image_url);
-                        Toast.makeText(ft.getContext(), "Retirer des favoris !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ft.getContext(), "Removed from favorites !", Toast.LENGTH_SHORT).show();
                         Common.animeRepository.delete(animeEntity);
                         in_bdd = false;
                     } else {
-                        button_database.setText("Retirer des favoris");
+                        button_database.setText("Remove from favorites");
                         AnimeEntity animeEntity = new AnimeEntity();
-                        System.out.println(final_anime.getTitle() + "TITLTEEEEE");
                         animeEntity.setAnime_name(final_anime.getTitle());
                         animeEntity.setDate(final_anime.getPremiered());
                         animeEntity.setNote(final_anime.getScore());
                         animeEntity.setIdAnime(final_anime.mal_id);
                         animeEntity.setImage_url(final_anime.image_url);
                         Common.animeRepository.insert(animeEntity);
-                        Toast.makeText(ft.getContext(), "Ajouter aux favoris !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ft.getContext(), "Added to favorites !", Toast.LENGTH_SHORT).show();
                         in_bdd = true;
                     }
                 }
@@ -179,7 +182,11 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
 
 
         }
-
+        else{
+            Intent intent = getActivity().getIntent();
+            int id = intent.getIntExtra("id",0);
+            executeHttpRequestWithRetrofit(id);
+        }
 
 
     }
@@ -205,13 +212,20 @@ public class Fragment_Detail extends Fragment implements AnimeUniqueCall.Callbac
         return rootView;
     }
 
+    /**
+     * iniate the database
+     * @param v the View
+     */
     private void init_db(View v) {
         Common.animeDataBase = AnimeDataBase.getInstance(v.getContext());
         Common.animeRepository = AnimeRepository.getInstance(AnimeDataSourceImpl.getInstance(Common.animeDataBase.animeDao()));
     }
 
 
-
+    /**
+     * the function calling the AnimeCall class function to get an anime using id
+     * @param id the id of the anime
+     */
     private void executeHttpRequestWithRetrofit(int id){
         String str_id = String.valueOf(id);
         AnimeUniqueCall.get_anime_unique(this, str_id);

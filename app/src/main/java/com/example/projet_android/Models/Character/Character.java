@@ -15,25 +15,11 @@ public class Character
         return mal_id;
     }
 
-    public void setMal_id(int mal_id) {
-        this.mal_id = mal_id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public String getImage_url() {
         return image_url;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
 
     public String getName() {
         return name;
@@ -47,9 +33,6 @@ public class Character
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public List<Voice_actor> getVoice_actors() {
         return voice_actors;

@@ -20,7 +20,6 @@ import com.example.projet_android.Models.RootObject;
 import com.example.projet_android.Models.Top;
 import com.example.projet_android.R;
 import com.example.projet_android.Utils.api.AnimeCalls;
-import com.example.projet_android.Utils.api.NetworkAsyncTask;
 import com.example.projet_android.recycler_view.AnimeActionInterface;
 import com.example.projet_android.recycler_view.DataGenerator;
 import com.example.projet_android.recycler_view.MyDataAdapter;
@@ -28,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AnimeActionInterface, NetworkAsyncTask.Listeners, AnimeCalls.Callbacks {
+public class MainActivity extends AppCompatActivity implements AnimeActionInterface,  AnimeCalls.Callbacks {
 
     private MyDataAdapter myDataAdapter;
     private RecyclerView recyclerView;
@@ -56,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
         return true;
     }
 
+    /**
+     * Setup the favorite button in the menu
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_layout:
@@ -109,33 +111,16 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
 
 
     /**
-     * Call the fonction get_anime from my AnimeCall class wich ll do the Api call
+     * Call the fonction get_anime from my AnimeCall class wich ll do the Api call on the most popular anime
      */
     private void executeHttpRequestWithRetrofit(){
         AnimeCalls.get_anime(this, "bypopularity");
     }
 
-    @Override
-    public void onPreExecute() {
-        this.updateUIWhenStartingHTTPRequest();
-    }
-
-    @Override
-    public void doInBackground() { }
-
-    @Override
-    public void onPostExecute(String json) {
-        this.updateUIWhenStopingHTTPRequest(json);
-    }
-
-    // ------------------
-    //  UPDATE UI
-    // ------------------
 
     @Override
     public void onFailure() {
-        // 2.2 - When getting error, we update UI
-        this.updateUIWhenStopingHTTPRequest("An error happened !");
+
     }
 
     @Override
@@ -146,19 +131,20 @@ public class MainActivity extends AppCompatActivity implements AnimeActionInterf
     }
 
 
-    private void updateUIWhenStopingHTTPRequest(String response){
-    }
 
 
-    private void updateUIWhenStartingHTTPRequest(){
-        this.tv.setText("Downloading... Please wait !");
-    }
 
-    // 3 - Update UI showing only name of users
-
+    /**
+     * @param rootObjects the root_object you get by calling the api
+     */
     private void updateUIWithListOfAnime(RootObject rootObjects){
-        l_top = rootObjects.getTop() ;
-        myDataAdapter.bindViewModels(DataGenerator.generateData(l_top));
+        if(rootObjects!=null) {
+            l_top = rootObjects.getTop();
+            myDataAdapter.bindViewModels(DataGenerator.generateData(l_top));
+        }
+        else{
+            executeHttpRequestWithRetrofit();
+        }
     }
 
     /**

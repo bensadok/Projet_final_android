@@ -29,7 +29,6 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
             private TextView en_doubleurTextView;
 
             private ImageView char_imageView;
-            private ImageButton imageButton;
             private CharacterViewModel characterViewModel;
             private int position;
             private View v;
@@ -42,7 +41,6 @@ public class CharacterAdapter  extends RecyclerView.Adapter<CharacterAdapter.Cha
                 doubleurTextView = v.findViewById(R.id.doubleur_textView);
                 en_doubleurTextView = v.findViewById(R.id.en_doubleur);
                 char_imageView = v.findViewById(R.id.character_imageview);
-                imageButton = v.findViewById(R.id.character_img_btn_character);
             }
 
 

@@ -19,7 +19,7 @@ import com.example.projet_android.recycler_view.Character_DataGenerator;
 
 public class Fragment_plus_info extends Fragment implements  CharacterCalls.Callbacks{
 
-    public static final String TAB_NAME = "Personnages";
+    public static final String TAB_NAME = "Characters";
 
 
     private View rootView;
@@ -43,10 +43,8 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
 
 
         executeHttpRequestWithRetrofit(id);
-        System.out.println("test2");
 
         setupRecyclerView();
-        System.out.println("test3");
 
         return rootView;
     }
@@ -89,18 +87,22 @@ public class Fragment_plus_info extends Fragment implements  CharacterCalls.Call
     @Override
     public void onResponse(@Nullable CharacterRootObject chars){
         if (chars != null) this.updateUIWithListOfChar(chars);
-        else System.out.println("null");
     }
 
     @Override
     public void onFailure() {
-        System.out.println("errorrr");
     }
 
 
     private void updateUIWithListOfChar(CharacterRootObject rootObjects){
+        if(rootObjects!=null)
+            characterAdapter.bindViewModels(Character_DataGenerator.generateCharData(rootObjects));
+        else{
+            Intent intent = getActivity().getIntent();
+            int id = intent.getIntExtra("id",0);
+            executeHttpRequestWithRetrofit(id);
+        }
 
-        characterAdapter.bindViewModels(Character_DataGenerator.generateCharData(rootObjects));
     }
 
 
